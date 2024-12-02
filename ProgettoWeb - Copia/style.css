@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.5s ease; /* Transizione morbida per lo sfondo */
+}
+
+h1 {
+    color: #ff0000; /* Rosso YouTube */
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+iframe {
+    margin: 20px auto;
+    border-radius: 10px; /* Angoli arrotondati */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra attorno al video */
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina YouTube </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Benvenuto sulla mia Pagina YouTube!</h1>
+    
+    <!-- Selettore per cambiare video -->
+    <h2>Scegli una canzone:</h2>
+    <select id="videoSelector" onchange="cambiaVideo()">
+        <option value="II17BnBZZwY">Canzone 1</option>
+        <option value="dQw4w9WgXcQ">Canzone 2</option>
+        <option value="3JZ_D3ELwOQ">Canzone 3</option>
+        <option value="xfK39K2K4eM">Canzone 4</option>
+        <option value="ewkafPicujg">Canzone 5</option>
+        <option value="II17BnBZZwY">Canzone 6</option> <!-- Nuova canzone aggiunta -->
+    </select>
+
+    <!-- Video incorporato -->
+    <div id="videoContainer">
+        <iframe id="youtubeVideo" width="560" height="315" 
+                src="https://www.youtube.com/embed/ma8n5UlC420" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Selettore per cambiare sfondo -->
+    <h2>Scegli uno sfondo:</h2>
+    <select id="backgroundSelector" onchange="cambiaSfondo()">
+        <option value="#f0f8ff">Azzurro</option>
+        <option value="#ffcccc">Rosa</option>
+        <option value="#cce7ff">Blu</option>
+        <option value="#d4edda">Verde</option>
+        <option value="#ffffff">Bianco</option>
+    </select>
+
+    <script src="script.js"></script>
+</body>
+</html>
