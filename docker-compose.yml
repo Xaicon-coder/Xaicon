@@ -1,0 +1,62 @@
+version: "3.9"
+
+# ══════════════════════════════════════════════════════
+#  AniStream — Docker Compose
+#
+#  Avvio rapido:
+#    cp .env.example .env  →  modifica .env  →  ./deploy.sh start
+#
+#  Struttura video attesa in MEDIA_PATH:
+#    /srv/anime/
+#    ├── Dr. Stone/
+#    │   ├── Dr. Stone/              (folderName stagione)
+#    │   │   ├── DrStone_Ep_01_ITA.mp4
+#    │   │   └── DrStone_Ep_02_ITA.mp4
+#    │   └── Dr. Stone: Stone Wars/
+#    │       └── DrStone2_Ep_01_ITA.mp4
+#    ├── Attack on Titan/
+#    │   └── Stagione 1/
+#    │       └── episodio-1.mp4
+#    └── ...
+# ══════════════════════════════════════════════════════
+
+services:
+
+  # ── Frontend React ────────────────────────────────────
+  anistream:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Queste variabili vengono embedded nel bundle JS durante il build
+        # Devono puntare al tuo Supabase accessibile DAL BROWSER (non dal container)
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
+    container_name: anistream
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:80"
+    volumes:
+      # Video anime (read-only, montato dal server host)
+      - ${MEDIA_PATH:-/srv/anime}:/media/anime:ro
+    environment:
+      TZ: Europe/Rome
+    networks:
+      - anistream-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+networks:
+  anistream-net:
+    driver: bridge
+
+# ══════════════════════════════════════════════════════
+#  NOTA: Supabase self-hosted (192.168.1.95:8000)
+#  NON è incluso qui perché è già in esecuzione sul tuo server.
+#  Se vuoi avviare Supabase via Docker, usa il repo ufficiale:
+#  https://github.com/supabase/supabase/tree/master/docker
+# ══════════════════════════════════════════════════════
