@@ -1,0 +1,18 @@
+# Dipendenze
+node_modules/
+
+# Variabili d'ambiente (CRITICO: non caricarle mai!)
+.env
+
+# File di log
+*.log
+npm-debug.log*
+
+# Cartelle temporanee o di dati locali
+tmp/
+content/
+dist/
+
+# File di sistema
+.DS_Store
+Thumbs.db
